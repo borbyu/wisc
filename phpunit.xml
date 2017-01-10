@@ -1,13 +1,13 @@
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Wisc">
-            <directory>tests/ImpactOauthClient</directory>
+            <directory>tests/Wisc</directory>
         </testsuite>
 
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">lib/ImpactOauthClient</directory>
+            <directory suffix=".php">lib/Wisc</directory>
         </whitelist>
     </filter>
     <logging>

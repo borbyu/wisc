@@ -37,7 +37,9 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($container->exists('test'));
         $container->register(
             'test',
-            function () { return 'test'; }
+            function () {
+                return 'test';
+            }
         );
         $this->assertTrue($container->exists('test'));
     }
@@ -47,7 +49,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitWithDependencyMap()
     {
-        $depMap = $this->getMockBuilder('\Container\DependencyMapInterface')->getMock();
+        $depMap = $this->getMockBuilder('\Wisc\DependencyMapInterface')->getMock();
         $container = ServiceContainer::init($depMap);
         $this->assertTrue($container instanceof ServiceContainer);
     }
@@ -83,7 +85,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetWithInit()
     {
-        $depMap = $this->getMockBuilder('\Container\DependencyMapInterface')->getMock();
+        $depMap = $this->getMockBuilder('\Wisc\DependencyMapInterface')->getMock();
         $container = ServiceContainer::get(true, $depMap);
         $this->assertTrue($container instanceof ServiceContainer);
     }
@@ -94,7 +96,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
     public function testGetNoInitWithDependencyMap()
     {
         ServiceContainer::init();
-        $depMap = $this->getMockBuilder('\Container\DependencyMapInterface')->getMock();
+        $depMap = $this->getMockBuilder('\Wisc\DependencyMapInterface')->getMock();
         $container = ServiceContainer::get(false, $depMap);
         $this->assertTrue($container instanceof ServiceContainer);
     }
@@ -106,8 +108,10 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = ServiceContainer::init();
         $container->register(
-            'foo', 
-            function() { return microtime(); }, 
+            'foo',
+            function () {
+                return microtime();
+            },
             false
         );
         $service1 = $container->locate('foo');
@@ -125,8 +129,10 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
     {
         $container = ServiceContainer::init();
         $container->register(
-            'foo', 
-            function () { return microtime(); }, 
+            'foo',
+            function () {
+                return microtime();
+            },
             true
         );
         $service1 = $container->locate('foo');
@@ -186,7 +192,7 @@ class ServiceContainerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Container\ServiceContainerException
+     * @expectedException \Wisc\ServiceContainerException
      */
     public function testInvalidAppLevel()
     {
